@@ -1,0 +1,16 @@
+
+.header-style{
+    color: red;
+}
+
+.todo{
+    font-size:25 px;
+    color: green;
+}
+.complete{
+    display:flex;
+    background-color:green;
+    color:white;
+
+
+}
