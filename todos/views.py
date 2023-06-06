@@ -71,18 +71,32 @@ class Todos:
             todos_data = json.load(f)
             self.from_dict(todos_data)
 
-def home(request):
-    return render(request, 'todos.html', {'todos': requests.get(URL).json()})
+#def home(request):       # обработка GET ЗАПРОСА
+    #return render(request, 'todos.html', {'todos': requests.get(URL).json()})
 
+def home(request):
+    if request.method == 'GET':
+        return render(request, 'todos.html', {'todos': requests.get(URL).json()})
+
+    elif request.method == 'POST':
+        todo_ = dict(request.POST)
+        for key in todo_:
+            todo_[key] = todo_[key][0]
+
+        todo_["id"] = int(todo_["id"]) if "id" in todo_ else 5
+        Todos().todos.append(todo_)
+        return render(request,'todos.html', {'todos':requests.get(URL).json()})
+
+def create_todo(request):
+    return render(request, "create_todo.html")
 
 def todo(request):
     return JsonResponse({'todos': RESPONSE})
 
 def get_todo(request, todo_Id:int):
-    todos=Todos()
-    todo =next((todo_id for todo_id in todos if todo_id== todo_Id),None)
-    if todo.todo_id:
-        return JsonResponse(todo)
+    todo =next((t for t in Todos().todos if t.todo_id== todo_Id),None)
+    if todo:
+        return JsonResponse(vars(todo))
     return HttpResponse(status=404)
 
 
