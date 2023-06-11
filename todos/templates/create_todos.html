@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Create Todo</h1>
+  <form method="post" action="{% url 'home' %}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea>
+    <br>
+    <label for="user">User:</label>
+    <input type="text" id="user" name="user">
+    <br>
+    <label for="completed">Completed:</label>
+    <input type="checkbox" id="completed" name="completed">
+    <br>
+    <button type="submit" value="Create">Create</button>
+  </form>
+<a href="{% url 'home' %}">ссылка на список todo</a>
+{% endblock %}
