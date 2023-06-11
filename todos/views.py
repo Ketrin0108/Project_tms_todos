@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+
 from .models import ToDo
 import requests
 import json
@@ -24,13 +24,13 @@ def home(request): # создание задачи (Todo) при помощи PO
     elif request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')
-        user_id = request.POST.get('user_id')
+        user = request.POST.get('user')
         todo = ToDo.objects.create(
             name=name,
             description=description,
-            user_id=user_id
+            user_id=user
         )
-        todos.append(todo)
+        todos = ToDo.objects.all()
         return redirect('todo_list')
     else:
         return render(request, 'create_todos.html')

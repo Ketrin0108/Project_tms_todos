@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .utils import todos,todo_list,create_todo,home
+
 
 urlpatterns = [
     path('', views.home,name="home"),
