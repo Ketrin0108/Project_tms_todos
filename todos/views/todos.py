@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 
-from .models import ToDo
+from todos.models import ToDo
 import requests
 import json
 
