@@ -21,34 +21,12 @@ def todo_list(request):  # отображение всех задач в html
     todos = ToDo.objects.all()
     return render(request, 'todo_list.html', {'todos': todos})
 
-def home(request): # создание задачи (Todo) при помощи POST формы
-    todos = ToDo.objects.all()
-    if request.method == 'GET':
-        return render(request, 'todo_list.html', {'todos': todos})
-    elif request.method == 'POST':
-        name = request.POST.get('name')
-        description = request.POST.get('description')
-        user = request.POST.get('user')
-        todo = ToDo.objects.create(
-            name=name,
-            description=description,
-            user_id=user
-        )
-        todos = ToDo.objects.all()
-        return redirect('todo_list')
-    else:
-        return render(request, 'create_todo.html')
-
-
-#def create_todo(request):
-    #return render(request, "create_todos.html")
-
 def create_todo(request):
     if request.method == 'POST':
         form = ToDoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("todos")
+            return redirect("home")
         else:
             return render(request, "create_todo.html", {"form": form})
 
