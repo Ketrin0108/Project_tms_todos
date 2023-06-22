@@ -1,14 +1,14 @@
-<div>
-    <td>id:{{ToDo.id}}</td>
-    </br>
-    <td>name:{{ToDo.name}}</td>
-    </br>
-    <td>description:{{ToDo.description}}</td>
-    </br>
-    <td>user_id:{{ToDo.user_id}}</td>
-    </br>
-    <td>completed:{{ToDo.completed}}</td>
-    <button class="complete">Complete</button>
-    </br>
-    </br>
+<div class="col-sm-6">
+    <div class="card post-card">
+        <div class="card-body">
+            <h5 class="card-name">{{todo.name}} </h5>
+             <h5 class="card-description">{{todo.description}} </h5>
+            <div class="row">
+                <a href="{% url 'update_todo' todo_id=todo.id %}" class="btn btn-primary btn-row">Update</a>
+                <form action="{% url 'delete_todo' todo_id=todo.id %}" method="post">
+                    <button class="btn btn-danger btn-row" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
