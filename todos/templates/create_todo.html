@@ -3,6 +3,8 @@
 {% block content %}
     <form action="{% url 'create_todo' %}" method="post">
         {{ form.non_field_errors }}
+        {% csrf_token %}
+
         <div class="form-group">
             {% if form.name.errors %}
                 <div class="alert alert-danger" role="alert">{{ form.name.errors }}</div>
@@ -15,7 +17,7 @@
                 <div class="alert alert-danger" role="alert">{{ form.description.errors }}</div>
             {% endif %}
             <label for="{{ form.description.label }}">{{ form.description.label }}:</label>
-            <textarea name="{{form.description.name}}" class="form-control" id="{{ form.description.label }}" rows="3"></textarea>
+            <textarea name="{{form.description.name}}" class="form-control" id="{{ form.description.label }}" rows="3" required>{{ form.description.value }}</textarea>
         </div>
         <div class="form-group">
             {% if form.user.errors %}
@@ -23,7 +25,7 @@
             {% endif %}
             <label for="{{ form.user.label }}">{{ form.user.label }}:</label>
             <select name="{{form.user.name}}" class="form-control" id="{{ form.user.label }}" required>
-                {% for option in form.blog.field.choices %}
+                {% for option in form.user.field.choices %}
                     <option value="{{option.0}}">{{option.1}}</option>
                 {% endfor %}
             </select>
@@ -33,7 +35,7 @@
                 <div class="alert alert-danger" role="alert">{{ form.completed.errors }}</div>
             {% endif %}
             <label for="{{ form.completed.label }}">{{ form.completed.label }}:</label>
-            <input type="checkbox" name="{{form.completed.name}}" class="form-control" id="{{ form.completed.label }}" required>
+            <input type="checkbox" name="{{form.completed.name}}" class="form-control" id="{{ form.completed.label }}" >
         </div>
         <input type="submit" value="Create" class="btn btn-outline-success">
     </form>

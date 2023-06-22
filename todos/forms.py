@@ -11,7 +11,7 @@ class ToDoForm(forms.ModelForm):
         model = ToDo
         fields = ['id', 'name', 'description', 'user', 'completed']
 
-    def clean_title(self):
+    def clean_name(self):
         if not self.cleaned_data.get('name') and self.instance.name:
             return self.instance.name
 
@@ -33,12 +33,10 @@ class ToDoUpdateForm(ToDoForm):
         cleaned_data['name'] = cleaned_data.get('name') or self.instance.name
         cleaned_data['description'] = cleaned_data.get('description') or self.instance.description
         cleaned_data['user'] = cleaned_data.get('user') or self.instance.user
-
         cleaned_data['completed'] = cleaned_data.get('completed') if cleaned_data.get('completed') is not None else self.instance.completed
 
-
-    def clean_description(self):
-        return self.cleaned_data.get('description').replace('/', '')
+    def clean_name(self):
+        return self.cleaned_data.get('name').strip() if self.cleaned_data.get('name') else None
 
 
 class ToDoFilterForm(forms.Form):
