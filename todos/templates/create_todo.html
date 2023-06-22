@@ -35,7 +35,7 @@
                 <div class="alert alert-danger" role="alert">{{ form.completed.errors }}</div>
             {% endif %}
             <label for="{{ form.completed.label }}">{{ form.completed.label }}:</label>
-            <input type="checkbox" name="{{form.completed.name}}" class="form-control" id="{{ form.completed.label }}" required>
+            <input type="checkbox" name="{{form.completed.name}}" class="form-control" id="{{ form.completed.label }}" >
         </div>
         <input type="submit" value="Create" class="btn btn-outline-success">
     </form>

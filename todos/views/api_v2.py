@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from todos.models import ToDo
 from rest_framework import viewsets, filters, generics
 from rest_framework import permissions
-from todos.serializers import ToDoSerializer,ToDoListSerializer
+from todos.serializers import ToDoSerializer, ToDoListSerializer
 
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
@@ -23,14 +23,8 @@ class ToDoViewSet(viewsets.ModelViewSet):
     search_fields = ['name', "id"] # поиск по ...
 
 
-    def perform_create(self, serializer):
-        if self.request.user.is_authenticated:
-            serializer.save(user=self.request.user)
-        else:
-            raise ValidationError('Only authenticated users can create todos')
-
 class ToDoListView(generics.ListAPIView):
     serializer_class = ToDoListSerializer
 
     def get_queryset(self):
-        return ToDo.objects.all()
+       return ToDo.objects.all()

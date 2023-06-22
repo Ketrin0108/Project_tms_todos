@@ -24,3 +24,6 @@ urlpatterns = [
     path('api/v2/', include('todos.urls.api_v2')),
 
 ]
+
+
+
