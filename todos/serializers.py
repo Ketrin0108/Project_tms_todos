@@ -12,12 +12,3 @@ class ToDoSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class ToDoListSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
-
-    class Meta:
-        model = ToDo
-        fields = (
-            "id", "name", "description",  "user"
-        )
-        read_only_fields = ("user")
