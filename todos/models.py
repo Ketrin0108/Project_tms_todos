@@ -13,5 +13,19 @@ class ToDo(models.Model):
         return self.name
 
 
+#class Priority(models.Model):
+    #name = models.CharField(max_length=50)
+
+   # def __str__(self):
+        #return self.name
+
+
+#class Label(models.Model):
+    #name = models.CharField(max_length=50)
+   # todos = models.ManyToManyField(ToDo, related_name='labels')
+
+   # def __str__(self):
+       # return self.name
+
 
 # Create your models here.

@@ -6,6 +6,7 @@ from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_page
 
 from todos.models import ToDo
 from todos.forms import ToDoForm,ToDoUpdateForm
@@ -13,7 +14,7 @@ import requests
 import json
 
 from requests import get
-
+@cache_page(60 * 15)
 def todos(request):
     return render(request, "todos.html", {"todos": ToDo.objects.select_related("user").all()})
 

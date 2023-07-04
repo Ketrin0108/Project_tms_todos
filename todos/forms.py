@@ -9,7 +9,7 @@ class ToDoForm(forms.ModelForm):
 
     class Meta:
         model = ToDo
-        fields = ['id', 'name', 'description', 'user', 'completed']
+        fields = ['id', 'name', 'description', 'user',  'completed']
 
     def clean_name(self):
         if not self.cleaned_data.get('name') and self.instance.name:
