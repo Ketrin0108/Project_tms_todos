@@ -30,7 +30,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Todos API Documentation",
         default_version="v1",
-        description="API documentation for social network app",
+        description="API documentation for todos",
         terms_of_service="https://www.example.com/terms/",
         contact=openapi.Contact(email=settings.SUPPORT_TEAM_EMAIL),
         license=openapi.License(name="BSD License"),
