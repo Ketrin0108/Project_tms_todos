@@ -8,3 +8,5 @@ posts/
 ../../.idea/
 db.sqlite3
 ../../main.py
+notes
+/static
