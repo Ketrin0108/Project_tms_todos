@@ -34,7 +34,15 @@ python manage.py shell
 - `python manage.py shell` - open django application console
 - `python manage.py shell_plus --print-sql` - open django shell with sql explanation
 
+### Run application using gunicorn:
 
+```gunicorn social.wsgi:application```
+
+### Run celery
+
+ - `python -m celery -A tms worker -l info -P gevent` - run celery worker
+ - `celery -A tms beat -l info` - run celery beat
+ - `celery -A tms worker --beat --loglevel=info` - run celery beat
 
 # Todos
 

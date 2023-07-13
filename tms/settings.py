@@ -13,6 +13,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -31,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 
@@ -201,4 +202,15 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': 'tms.settings.show_toolbar',
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR,STATIC_URL)
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+# Время между выполнением каждой задачи в секундах
+CELERY_BEAT_SCHEDULE = {
+    'log_completed_tasks_daily': {
+        'task': 'todos.tasks.log_completed_tasks',
+        'schedule': crontab(hour=15,minute=30),  # Каждые 24 часа
+    },
+}
