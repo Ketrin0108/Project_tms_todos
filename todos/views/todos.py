@@ -18,7 +18,7 @@ from requests import get
 from todos.tasks import logging_task
 
 
-@cache_page(60*10)
+@cache_page(0)
 def todos(request):
     logging_task.delay(params=["Todos function called"])
     return render(request, "todos.html", {"todos": ToDo.objects.select_related("user").all()})

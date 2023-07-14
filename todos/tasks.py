@@ -14,7 +14,6 @@ def logging_task(params=None):
     print(params)
     sleep(10)
 
-
 # Задача для логгирования завершенных задач для каждого пользователя
 @app.task
 def log_completed_tasks():

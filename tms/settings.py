@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 
@@ -98,7 +98,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15,
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60*15,
     'DEFAULT_CACHE_BACKEND': 'default',
 }
 
@@ -202,7 +202,7 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': 'tms.settings.show_toolbar',
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR,STATIC_URL)
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
@@ -211,6 +211,6 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379"
 CELERY_BEAT_SCHEDULE = {
     'log_completed_tasks_daily': {
         'task': 'todos.tasks.log_completed_tasks',
-        'schedule': crontab(hour=15,minute=30),  # Каждые 24 часа
+        'schedule': crontab(hour="*", minute="0"),  # задача будет запускаться каждый день в полночь (00:00).
     },
 }
