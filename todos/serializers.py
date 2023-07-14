@@ -1,6 +1,7 @@
 from todos.models import ToDo
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class ToDoSerializer(serializers.HyperlinkedModelSerializer):

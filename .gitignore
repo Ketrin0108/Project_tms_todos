@@ -10,3 +10,6 @@ db.sqlite3
 ../../main.py
 notes
 /static
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
