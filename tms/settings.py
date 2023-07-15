@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'debug_toolbar',
+    #'debug_toolbar',
     'drf_yasg',
     'coreapi',
 ]
@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'todos.middleware.QueryLogsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 
@@ -211,6 +211,6 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379"
 CELERY_BEAT_SCHEDULE = {
     'log_completed_tasks_daily': {
         'task': 'todos.tasks.log_completed_tasks',
-        'schedule': crontab(hour="*", minute="0"),  # задача будет запускаться каждый день в полночь (00:00).
+        'schedule': crontab(hour="0",minute="0"),  # задача будет запускаться каждый день в полночь (00:00).
     },
 }
