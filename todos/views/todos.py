@@ -14,8 +14,13 @@ import requests
 import json
 
 from requests import get
-@cache_page(60 * 15)
+
+from todos.tasks import logging_task
+
+
+@cache_page(0)
 def todos(request):
+    logging_task.delay(params=["Todos function called"])
     return render(request, "todos.html", {"todos": ToDo.objects.select_related("user").all()})
 
 def todo_list(request):  # отображение всех задач в html

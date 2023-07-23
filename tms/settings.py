@@ -13,6 +13,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -97,7 +98,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15,
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60*15,
     'DEFAULT_CACHE_BACKEND': 'default',
 }
 
@@ -202,3 +203,14 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+# Время между выполнением каждой задачи в секундах
+CELERY_BEAT_SCHEDULE = {
+    'log_completed_tasks_daily': {
+        'task': 'todos.tasks.log_completed_tasks',
+        'schedule': crontab(hour="*", minute="0"),  # задача будет запускаться каждый день в полночь (00:00).
+    },
+}
