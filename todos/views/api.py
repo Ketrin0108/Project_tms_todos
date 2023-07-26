@@ -14,7 +14,7 @@ def todos(request):
             data = form.save()
             return JsonResponse(model_to_dict(data))
         else:
-            return JsonResponse({'status': 400, 'errors': form.errors})
+            return JsonResponse({'errors': form.errors},status=400)
     return JsonResponse({'todos': [model_to_dict(p) for p in ToDo.objects.all()]})
 
 
@@ -37,4 +37,4 @@ def todo(request, todo_id: int):
         todo_obj.delete()
         return JsonResponse({'status': 204, 'message': 'ToDo successfully deleted'})
 
-    return JsonResponse({'todos': model_to_dict(todo_obj)})
+    return JsonResponse({'todo': model_to_dict(todo_obj)})
